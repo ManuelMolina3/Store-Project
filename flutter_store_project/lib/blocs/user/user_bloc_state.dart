@@ -6,7 +6,7 @@ sealed class UserBlocState {}
 final class UserBlocInitial extends UserBlocState {}
 
 final class UserFetchSuccess extends UserBlocState {
-  final UserResponse usersList;
+  final List<UserResponse> usersList;
   UserFetchSuccess(this.usersList);
 }
 
