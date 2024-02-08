@@ -1,4 +1,4 @@
-part of 'user_bloc_bloc.dart';
+part of 'user_bloc.dart';
 
 @immutable
 sealed class UserBlocEvent {}
