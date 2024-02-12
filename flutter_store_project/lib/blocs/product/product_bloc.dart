@@ -9,18 +9,18 @@ part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  final ProductRepo _productRepo;
+  final ProductRepo productRepo;
 
-  ProductBloc(this._productRepo) : super(ProductInitial()) {
-    on<ProductEvent>(_onProductFetchList);
+  ProductBloc(this.productRepo) : super(ProductInitial()) {
+    on<ProductFetchList>(_onProductFetchList);
   }
 
-  Future<FutureOr<void>> _onProductFetchList(
+  void _onProductFetchList(
       ProductFetchList event, Emitter<ProductState> emit) async {
     try {
-      final productList = await _productRepo.fetchProduct();
+      final productList = await productRepo.fetchProduct();
       emit(ProductFetchSucces(productList));
-    } catch (e) {
+    } on Exception catch (e) {
       emit(ProductFetchError(e.toString()));
     }
   }

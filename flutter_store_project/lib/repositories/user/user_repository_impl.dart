@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 import 'dart:convert';
 
 import 'package:flutter_store_project/models/user_response/user_response.dart';
@@ -29,4 +26,3 @@ class UserRepositoryImpl extends UserRepository {
     }
   }
 }
->>>>>>> a5aa38d1e0c006fa63d536b4464ce87337eef622
