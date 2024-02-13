@@ -8,7 +8,7 @@ final class ProductInitial extends ProductState {}
 final class ProductFetchLoading extends ProductState {}
 
 final class ProductFetchSucces extends ProductState {
-  final ProductResponse productList;
+  final List<ProductResponse> productList;
   ProductFetchSucces(this.productList);
 }
 

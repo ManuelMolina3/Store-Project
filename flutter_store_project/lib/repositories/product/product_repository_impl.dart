@@ -8,11 +8,14 @@ class ProductRepoImpl extends ProductRepo {
   final Client _httpClient = Client();
 
   @override
-  Future<ProductResponse> fetchProduct() async {
+  Future<List<ProductResponse>> fetchProduct() async {
     final response =
         await _httpClient.get(Uri.parse('https://fakestoreapi.com/products'));
     if (response.statusCode == 200) {
-      return ProductResponse.fromJson(json.decode(response.body));
+      final List<dynamic> data = json.decode(response.body);
+      List<ProductResponse> result =
+          data.map((e) => ProductResponse.fromJson(e)).toList();
+      return result;
     } else {
       throw Exception('Failed to load products');
     }

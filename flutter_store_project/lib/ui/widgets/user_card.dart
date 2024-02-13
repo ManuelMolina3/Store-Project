@@ -34,24 +34,30 @@ class CardUser extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 ),
                 Positioned(
-                  top: 10,
-                  right: 10,
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.red.withOpacity(0.8),
-                    ),
-                    child: Center(
-                      child: Text(user.name!.toString(),
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                )
+                    top: 10,
+                    right: 10,
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.red.withOpacity(0.8),
+                      ),
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Text(user.name!.toString(),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                          Text(user.email!),
+                          Text(user.phone!),
+                          Text(user.address!.toString())
+                        ],
+                      ),
+                    ))
               ],
             ),
           ),
