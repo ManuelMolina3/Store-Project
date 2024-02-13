@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'rating.dart';
-
 class ProductResponse {
   int? id;
   String? title;
@@ -11,49 +7,56 @@ class ProductResponse {
   String? image;
   Rating? rating;
 
-  ProductResponse({
-    this.id,
-    this.title,
-    this.price,
-    this.description,
-    this.category,
-    this.image,
-    this.rating,
-  });
+  ProductResponse(
+      {this.id,
+      this.title,
+      this.price,
+      this.description,
+      this.category,
+      this.image,
+      this.rating});
 
-  factory ProductResponse.fromMap(Map<String, dynamic> data) {
-    return ProductResponse(
-      id: data['id'] as int?,
-      title: data['title'] as String?,
-      price: (data['price'] as num?)?.toDouble(),
-      description: data['description'] as String?,
-      category: data['category'] as String?,
-      image: data['image'] as String?,
-      rating: data['rating'] == null
-          ? null
-          : Rating.fromMap(data['rating'] as Map<String, dynamic>),
-    );
+  ProductResponse.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    price = json['price'];
+    description = json['description'];
+    category = json['category'];
+    image = json['image'];
+    rating =
+        json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
   }
 
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'title': title,
-        'price': price,
-        'description': description,
-        'category': category,
-        'image': image,
-        'rating': rating?.toMap(),
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['price'] = this.price;
+    data['description'] = this.description;
+    data['category'] = this.category;
+    data['image'] = this.image;
+    if (this.rating != null) {
+      data['rating'] = this.rating!.toJson();
+    }
+    return data;
+  }
+}
 
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [ProductResponse].
-  factory ProductResponse.fromJson(String data) {
-    return ProductResponse.fromMap(json.decode(data) as Map<String, dynamic>);
+class Rating {
+  double? rate;
+  int? count;
+
+  Rating({this.rate, this.count});
+
+  Rating.fromJson(Map<String, dynamic> json) {
+    rate = json['rate'];
+    count = json['count'];
   }
 
-  /// `dart:convert`
-  ///
-  /// Converts [ProductResponse] to a JSON string.
-  String toJson() => json.encode(toMap());
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['rate'] = this.rate;
+    data['count'] = this.count;
+    return data;
+  }
 }

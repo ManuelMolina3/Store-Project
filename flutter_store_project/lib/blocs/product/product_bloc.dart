@@ -18,8 +18,9 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   void _onProductFetchList(
       ProductFetchList event, Emitter<ProductState> emit) async {
     try {
-      final productList = await productRepo.fetchProduct();
+      final productList = await productRepo.fetchProductList();
       emit(ProductFetchSucces(productList));
+      return;
     } on Exception catch (e) {
       emit(ProductFetchError(e.toString()));
     }

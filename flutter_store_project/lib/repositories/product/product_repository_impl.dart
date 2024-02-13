@@ -8,7 +8,7 @@ class ProductRepoImpl extends ProductRepo {
   final Client _httpClient = Client();
 
   @override
-  Future<List<ProductResponse>> fetchProduct() async {
+  Future<List<ProductResponse>> fetchProductList() async {
     final response =
         await _httpClient.get(Uri.parse('https://fakestoreapi.com/products'));
     if (response.statusCode == 200) {
