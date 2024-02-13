@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_project/blocs/user/user_bloc.dart';
 import 'package:flutter_store_project/models/user_response/user_response.dart';
 import 'package:flutter_store_project/ui/pages/user_detail_page.dart';
 
@@ -33,31 +32,29 @@ class CardUser extends StatelessWidget {
                 const Center(
                   child: CircularProgressIndicator(),
                 ),
-                Positioned(
-                    top: 10,
-                    right: 10,
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red.withOpacity(0.8),
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.red,
+                  ),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(
+                            "${user.name!.firstname} ${user.name!.lastname}",
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold)),
                       ),
-                      child: Column(
-                        children: [
-                          Center(
-                            child: Text(user.name!.toString(),
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold)),
-                          ),
-                          Text(user.email!),
-                          Text(user.phone!),
-                          Text(user.address!.toString())
-                        ],
-                      ),
-                    ))
+                      Text(user.email!),
+                      Text(user.phone!),
+                      Text(user.address!.toString())
+                    ],
+                  ),
+                )
               ],
             ),
           ),

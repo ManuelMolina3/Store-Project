@@ -52,9 +52,8 @@ class _UserPageState extends State<UserPage> {
           );
         } else if (state is UserFetchError) {
           return Text(state.errorMessage);
-        } else {
-          return const CircularProgressIndicator();
         }
+        return const CircularProgressIndicator();
       },
     );
   }
