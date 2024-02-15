@@ -38,6 +38,11 @@ class CardUser extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
+                      const Center(
+                          child: Icon(
+                        Icons.person,
+                        size: 70,
+                      )),
                       Center(
                         child: Text(
                             "${user.name!.firstname} ${user.name!.lastname}",
@@ -48,7 +53,7 @@ class CardUser extends StatelessWidget {
                       ),
                       Text(user.email!),
                       Text(user.phone!),
-                      Text(user.address!.street!)
+                      Text("${user.address!.street!} ${user.address!.number!}"),
                     ],
                   ),
                 )
@@ -74,16 +79,17 @@ class CardUser extends StatelessWidget {
                   child: Column(
                     children: [
                       Center(
-                        child: Text(
-                            "${user.name!.firstname} ${user.name!.lastname}",
+                        child: Text(user.username!,
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold)),
                       ),
+                      Text("${user.name!.firstname} ${user.name!.lastname}"),
                       Text(user.email!),
                       Text(user.phone!),
-                      Text(user.address!.street!)
+                      Text("${user.address!.street!} ${user.address!.number!}"),
+                      Text("${user.address!.city} ${user.address!.zipcode}")
                     ],
                   ),
                 )
