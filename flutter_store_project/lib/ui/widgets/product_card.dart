@@ -11,7 +11,6 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int delay = 100 * index;
     return SizedBox(
       width: 150,
       height: 300,
@@ -41,16 +40,6 @@ class ProductCard extends StatelessWidget {
                   height: 300,
                   fit: BoxFit.cover,
                 ),
-                Positioned(
-                    top: 10,
-                    right: 10,
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.red.withOpacity(0.8)),
-                    ))
               ],
             ),
           ),

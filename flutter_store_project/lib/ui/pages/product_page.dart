@@ -4,6 +4,7 @@ import 'package:flutter_store_project/blocs/product/product_bloc.dart';
 import 'package:flutter_store_project/repositories/product/product_repository.dart';
 import 'package:flutter_store_project/repositories/product/product_repository_impl.dart';
 import 'package:flutter_store_project/ui/widgets/product_card.dart';
+import 'package:flutter_store_project/ui/widgets/product_flip_card.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -46,7 +47,7 @@ class _ProductPageState extends State<ProductPage> {
             itemCount: state.productList.length,
             itemBuilder: (context, index) {
               final product = state.productList[index];
-              return ProductCard(product: product, index: index);
+              return ProductFlipCard(product: product, index: index);
             },
           );
         } else if (state is ProductFetchError) {
