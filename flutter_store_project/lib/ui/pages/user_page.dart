@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_store_project/blocs/product/product_bloc.dart';
-import 'package:flutter_store_project/repositories/product/product_repository.dart';
-import 'package:flutter_store_project/repositories/product/product_repository_impl.dart';
-import 'package:flutter_store_project/ui/widgets/product_card.dart';
+import 'package:flutter_store_project/blocs/user/user_bloc.dart';
+import 'package:flutter_store_project/repositories/user/user_repository.dart';
+import 'package:flutter_store_project/repositories/user/user_repository_impl.dart';
+import 'package:flutter_store_project/ui/widgets/user_card.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -13,78 +13,48 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  late ProductRepo productRepo;
-  late ProductBloc productBloc;
+  late UserRepository repository;
+  late UserBlocBloc _userBloc;
+  String title = 'Users';
 
+  @override
   void initState() {
-    productRepo = ProductRepoImpl();
-    productBloc = ProductBloc(productRepo)..add(ProductFetchList());
+    repository = UserRepositoryImpl();
+    _userBloc = UserBlocBloc(repository)..add(UserFetchList());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: productBloc,
+      value: _userBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Products"),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  _showBottomSheet(context);
-                },
-                icon: const Icon(Icons.filter_list))
-          ],
+          title: Text(title),
         ),
-        body: _productList(),
+        body: _userList(),
       ),
     );
   }
 
-  Widget _productList() {
-    return BlocBuilder<ProductBloc, ProductState>(
+  Widget _userList() {
+    return BlocBuilder<UserBlocBloc, UserBlocState>(
       builder: (context, state) {
-        if (state is ProductFetchSucces) {
+        if (state is UserFetchSuccess) {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: 0.7, mainAxisSpacing: 5.0),
-            itemCount: state.productList.length,
+                crossAxisCount: 2, childAspectRatio: 2, mainAxisSpacing: 5.0),
+            itemCount: state.usersList.length,
             itemBuilder: (context, index) {
-              final product = state.productList[index];
-              return ProductCard(product: product, index: index);
+              final user = state.usersList[index];
+              return CardUser(user: user, index: index);
             },
           );
-        } else if (state is ProductFetchError) {
-          return Text(state.errorMesage);
-        } else {
-          return const CircularProgressIndicator();
+        } else if (state is UserFetchError) {
+          return Text(state.errorMessage);
         }
+        return const CircularProgressIndicator();
       },
     );
-  }
-
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return SizedBox(
-            height: 200,
-            child: Center(
-              child: ListView(
-                children: const [
-                  ListTile(
-                    title: Row(
-                      children: [
-                        Icon(Icons.production_quantity_limits),
-                        Text("Products")
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
   }
 }

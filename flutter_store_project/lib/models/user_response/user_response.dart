@@ -1,8 +1,3 @@
-import 'dart:convert';
-
-import 'address.dart';
-import 'name.dart';
-
 class UserResponse {
   Address? address;
   int? id;
@@ -11,54 +6,115 @@ class UserResponse {
   String? password;
   Name? name;
   String? phone;
-  int? v;
+  int? iV;
 
-  UserResponse({
-    this.address,
-    this.id,
-    this.email,
-    this.username,
-    this.password,
-    this.name,
-    this.phone,
-    this.v,
-  });
+  UserResponse(
+      {this.address,
+      this.id,
+      this.email,
+      this.username,
+      this.password,
+      this.name,
+      this.phone,
+      this.iV});
 
-  factory UserResponse.fromMap(Map<String, dynamic> data) => UserResponse(
-        address: data['address'] == null
-            ? null
-            : Address.fromMap(data['address'] as Map<String, dynamic>),
-        id: data['id'] as int?,
-        email: data['email'] as String?,
-        username: data['username'] as String?,
-        password: data['password'] as String?,
-        name: data['name'] == null
-            ? null
-            : Name.fromMap(data['name'] as Map<String, dynamic>),
-        phone: data['phone'] as String?,
-        v: data['__v'] as int?,
-      );
-
-  Map<String, dynamic> toMap() => {
-        'address': address?.toMap(),
-        'id': id,
-        'email': email,
-        'username': username,
-        'password': password,
-        'name': name?.toMap(),
-        'phone': phone,
-        '__v': v,
-      };
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [UserResponse].
-  factory UserResponse.fromJson(String data) {
-    return UserResponse.fromMap(json.decode(data) as Map<String, dynamic>);
+  UserResponse.fromJson(Map<String, dynamic> json) {
+    address =
+        json['address'] != null ? new Address.fromJson(json['address']) : null;
+    id = json['id'];
+    email = json['email'];
+    username = json['username'];
+    password = json['password'];
+    name = json['name'] != null ? new Name.fromJson(json['name']) : null;
+    phone = json['phone'];
+    iV = json['__v'];
   }
 
-  /// `dart:convert`
-  ///
-  /// Converts [UserResponse] to a JSON string.
-  String toJson() => json.encode(toMap());
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.address != null) {
+      data['address'] = this.address!.toJson();
+    }
+    data['id'] = this.id;
+    data['email'] = this.email;
+    data['username'] = this.username;
+    data['password'] = this.password;
+    if (this.name != null) {
+      data['name'] = this.name!.toJson();
+    }
+    data['phone'] = this.phone;
+    data['__v'] = this.iV;
+    return data;
+  }
+}
+
+class Address {
+  Geolocation? geolocation;
+  String? city;
+  String? street;
+  int? number;
+  String? zipcode;
+
+  Address(
+      {this.geolocation, this.city, this.street, this.number, this.zipcode});
+
+  Address.fromJson(Map<String, dynamic> json) {
+    geolocation = json['geolocation'] != null
+        ? new Geolocation.fromJson(json['geolocation'])
+        : null;
+    city = json['city'];
+    street = json['street'];
+    number = json['number'];
+    zipcode = json['zipcode'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.geolocation != null) {
+      data['geolocation'] = this.geolocation!.toJson();
+    }
+    data['city'] = this.city;
+    data['street'] = this.street;
+    data['number'] = this.number;
+    data['zipcode'] = this.zipcode;
+    return data;
+  }
+}
+
+class Geolocation {
+  String? lat;
+  String? long;
+
+  Geolocation({this.lat, this.long});
+
+  Geolocation.fromJson(Map<String, dynamic> json) {
+    lat = json['lat'];
+    long = json['long'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['lat'] = this.lat;
+    data['long'] = this.long;
+    return data;
+  }
+}
+
+class Name {
+  String? firstname;
+  String? lastname;
+
+  Name({this.firstname, this.lastname});
+
+  Name.fromJson(Map<String, dynamic> json) {
+    firstname = json['firstname'];
+    lastname = json['lastname'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['firstname'] = this.firstname;
+    data['lastname'] = this.lastname;
+    return data;
+  }
 }

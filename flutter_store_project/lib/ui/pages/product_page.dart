@@ -43,7 +43,10 @@ class _ProductPageState extends State<ProductPage> {
         if (state is ProductFetchSucces) {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: 0.7, mainAxisSpacing: 5.0),
+                crossAxisCount: 3,
+                childAspectRatio: 0.8,
+                mainAxisSpacing: 5,
+                crossAxisSpacing: 5),
             itemCount: state.productList.length,
             itemBuilder: (context, index) {
               final product = state.productList[index];

@@ -18,6 +18,7 @@ class ProductFlipCard extends StatelessWidget {
       direction: FlipDirection.HORIZONTAL, // default
       side: CardSide.FRONT, // The side to initially display.
       front: Container(
+        color: const Color.fromARGB(255, 255, 255, 255),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Stack(
@@ -29,8 +30,8 @@ class ProductFlipCard extends StatelessWidget {
                 placeholder: kTransparentImage,
                 image: product.image!,
                 width: double.infinity,
-                height: 300,
-                fit: BoxFit.cover,
+                height: 200,
+                fit: BoxFit.contain,
               ),
             ],
           ),

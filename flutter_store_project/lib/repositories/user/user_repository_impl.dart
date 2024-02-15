@@ -15,7 +15,7 @@ class UserRepositoryImpl extends UserRepository {
   @override
   Future<List<UserResponse>> fetchUsers() async {
     final response =
-        await _httpClient.get(Uri.parse('https://fakestoreapi.com/carts/user'));
+        await _httpClient.get(Uri.parse('https://fakestoreapi.com/users'));
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
       List<UserResponse> results =
