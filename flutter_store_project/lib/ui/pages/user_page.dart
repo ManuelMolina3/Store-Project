@@ -43,7 +43,7 @@ class _UserPageState extends State<UserPage> {
         if (state is UserFetchSuccess) {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: 0.7, mainAxisSpacing: 5.0),
+                crossAxisCount: 2, childAspectRatio: 2, mainAxisSpacing: 5.0),
             itemCount: state.usersList.length,
             itemBuilder: (context, index) {
               final user = state.usersList[index];
