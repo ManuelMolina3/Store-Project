@@ -4,8 +4,7 @@ part of 'user_bloc.dart';
 sealed class UserBlocEvent {}
 
 class UserFetchList extends UserBlocEvent {
-  final String type;
-  UserFetchList(this.type);
+  UserFetchList();
 }
 
 class UserViewDetail extends UserBlocEvent {
