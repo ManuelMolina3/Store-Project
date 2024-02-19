@@ -37,10 +37,16 @@ class ProductFlipCard extends StatelessWidget {
           ),
         ),
       ),
-      back: Container(
-        child: Column(
-          children: [Text(product.title!), Text(product.description!)],
-        ),
+      back: Column(
+        children: [
+          Text(
+            product.title!,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 17,
+            ),
+          )
+        ],
       ),
     );
   }
